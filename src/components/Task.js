@@ -7,12 +7,13 @@ const Task = ( props ) => {
   const { isComplete, title } = props; 
   // const [complete, setComplete] = useState(props.isComplete);
   const buttonClass = isComplete ? 'tasks__item__toggle--completed' : '';
-
+  const task = {
+    id: props.id, isComplete : props.isComplete, title: props.title };
   return (
     <li className="tasks__item">
       <button
         className={`tasks__item__toggle ${buttonClass}`}
-        onClick={() => props.handleToggleComplete(props.id)}
+        onClick={() => props.handleToggleComplete(props.id, task)}
       >
         {props.title}
       </button>
