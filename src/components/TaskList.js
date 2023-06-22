@@ -11,9 +11,10 @@ const TaskList = ( props ) => {
           key={task.id}
           id={task.id}
           title={task.title}
-          isComplete={task.isComplete}
+          isComplete={task.is_complete}
           handleToggleComplete={props.handleToggleComplete}
           handleDeleteTask={props.handleDeleteTask}
+          handlePostTask={props.handlePostTask}
 
         />
       );
@@ -27,11 +28,12 @@ TaskList.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
-      isComplete: PropTypes.bool.isRequired,
+      is_complete: PropTypes.bool.isRequired,  // eslint-disable-line no-console
     })
   ).isRequired,
   handleToggleComplete: PropTypes.func.isRequired,
-  handleDeleteTask: PropTypes.func.isRequired 
+  handleDeleteTask: PropTypes.func.isRequired,
+  handlePostTask: PropTypes.func.isRequired,
 };
 
 export default TaskList;

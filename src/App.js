@@ -1,7 +1,7 @@
 import React from 'react';
 import TaskList from './components/TaskList.js';
 import './App.css';
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 // const TASKS = [
@@ -19,7 +19,7 @@ import axios from 'axios';
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
-  const API = "https://task-list-api-c17.onrender.com/tasks";
+  const API = 'https://task-list-api-c17.onrender.com/tasks';
   useEffect(() => {
     axios.get(API)
       .then((result) => {
@@ -36,6 +36,25 @@ const App = () => {
   //   }
   //   return updateTask
   // })
+  const handlePostTask = () => {
+    axios
+    .post(`${API}`,{title: 'sleep deep',
+    description: 'desc',})
+    .then((result) => {
+      console.log(result.data);
+      axios.get(API)
+          .then((result) => {
+            setTasks(result.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+    });
+
+  };
   const handleToggleComplete = (taskId, task) => {
     let type = '';
     if (task.isComplete) {
@@ -59,7 +78,7 @@ const App = () => {
       .catch((err) => {
         console.log(err);
       });
-    console.log("handleToddleComplete called");};
+    console.log('handleToddleComplete called');};
     // const newTasks = tasks.map((task) => {
     //   return (task.id === taskId) ? {...task, isComplete: !task.isComplete} : task;
     // });
@@ -71,11 +90,11 @@ const App = () => {
   const handleDeleteTask = (taskId) => {
     axios.delete(`${API}/${taskId}`)
     .then((result) => {
-      console.log(result.data)
+      console.log(result.data);
       const newTasks = [];
       for (let task of tasks) {
         if (task.id !== taskId){
-          newTasks.push(task)
+          newTasks.push(task);
         }
       }
       setTasks(newTasks);
@@ -98,11 +117,10 @@ const App = () => {
         <div><TaskList tasks={tasks}
         handleToggleComplete ={handleToggleComplete}
         handleDeleteTask={handleDeleteTask}
+        handlePostTask={handlePostTask}
         />
         </div>
       </main>
     </div>
-  );
-};
-
+  );};
 export default App;

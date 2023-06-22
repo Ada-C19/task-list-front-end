@@ -29,7 +29,8 @@ Task.propTypes = {
     title: PropTypes.string.isRequired,
     isComplete: PropTypes.bool.isRequired,
     handleToggleComplete: PropTypes.func.isRequired,
-    handleDeleteTask: PropTypes.func.isRequired
+    handleDeleteTask: PropTypes.func.isRequired,
+    handlePostTask: PropTypes.func.isRequired,
 };
 
 export default Task;
