@@ -16,26 +16,11 @@ import axios from 'axios';
 //     isComplete: true,
 //   },
 // ];
+const API = 'https://task-list-api-c17.onrender.com/tasks';
+
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
-  const API = 'https://task-list-api-c17.onrender.com/tasks';
-  useEffect(() => {
-    axios.get(API)
-      .then((result) => {
-        setTasks(result.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    }, []);
-  
-  // const newTasks = tasks.map((task) => {
-  //   if (task.id === id) {
-  //     const updateTask = {...task};
-  //   }
-  //   return updateTask
-  // })
   const handlePostTask = () => {
     axios
     .post(`${API}`,{title: 'sleep deep',
@@ -55,6 +40,25 @@ const App = () => {
     });
 
   };
+
+  useEffect(() => {
+    axios.get(API)
+      .then((result) => {
+        setTasks(result.data);
+        handlePostTask();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }, []);
+  
+  // const newTasks = tasks.map((task) => {
+  //   if (task.id === id) {
+  //     const updateTask = {...task};
+  //   }
+  //   return updateTask
+  // })
+
   const handleToggleComplete = (taskId, task) => {
     let type = '';
     if (task.isComplete) {
