@@ -29,7 +29,7 @@
     "jsx-a11y/no-onchange": "off",
     "no-console": "off",
     "quotes": ["warn", "single", { "avoidEscape": true }],
-    "camelcase": ["error", { "properties": "always" }],
+    // "camelcase": ["error", { "properties": "always" }],
     "semi": ["warn", "always"],
     "no-unused-vars": [
       "warn",

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Task from './Task';
 import './TaskList.css';
 
-const TaskList = ({ tasks }) => {
+const TaskList = ( props ) => {
   const getTaskListJSX = (tasks) => {
     return tasks.map((task) => {
       return (
@@ -11,12 +11,16 @@ const TaskList = ({ tasks }) => {
           key={task.id}
           id={task.id}
           title={task.title}
-          isComplete={task.isComplete}
+          isComplete={task.is_complete}
+          handleToggleComplete={props.handleToggleComplete}
+          handleDeleteTask={props.handleDeleteTask}
+          handlePostTask={props.handlePostTask}
+
         />
       );
     });
   };
-  return <ul className="tasks__list no-bullet">{getTaskListJSX(tasks)}</ul>;
+  return <ul className="tasks__list no-bullet">{getTaskListJSX(props.tasks)}</ul>;
 };
 
 TaskList.propTypes = {
@@ -24,9 +28,12 @@ TaskList.propTypes = {
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
-      isComplete: PropTypes.bool.isRequired,
+      is_complete: PropTypes.bool.isRequired,  // eslint-disable-line no-console
     })
   ).isRequired,
+  handleToggleComplete: PropTypes.func.isRequired,
+  handleDeleteTask: PropTypes.func.isRequired,
+  handlePostTask: PropTypes.func.isRequired,
 };
 
 export default TaskList;
